@@ -6,9 +6,16 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
 const multer = require('multer');
+const fs = require('fs');
 
 // Load environment variables
 dotenv.config();
+
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -78,7 +85,10 @@ app.post('/api/upload', authenticateToken, upload.single('file'), (req, res) => 
     return res.status(400).json({ message: 'No file uploaded' });
   }
   
-  const fileUrl = `/uploads/${req.file.filename}`;
+  // Use absolute URL for production (includes domain)
+  const baseUrl = process.env.BACKEND_URL || 'https://smartwinnr-chat-api.onrender.com';
+  const fileUrl = `${baseUrl}/uploads/${req.file.filename}`;
+  
   res.json({
     success: true,
     fileName: req.file.originalname,
