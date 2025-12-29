@@ -117,9 +117,9 @@ const ChatWindow = ({ room, user, socket }) => {
         senderId: user.id,
         senderName: user.username,
         timestamp: new Date(),
-          console.log('Emitted send_message event to room:', room._id);
         messageType: 'text'
       });
+      console.log('Emitted send_message event to room:', room._id);
     }
   };
 
