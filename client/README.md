@@ -1,12 +1,8 @@
 # SmartWinnr Client
 
-Real-time Chat Application Frontend - React.js
+Frontend for SmartWinnr chat application built with React.
 
-## Prerequisites
-- Node.js v16.0.0 or higher
-- npm v7.0.0 or higher
-
-## Installation
+## Setup
 
 1. Install dependencies:
    ```bash
@@ -18,25 +14,57 @@ Real-time Chat Application Frontend - React.js
    npm start
    ```
 
-Application opens at `http://localhost:3000`
+App opens at `http://localhost:3001` (or `http://localhost:3000` if 3001 is in use)
 
-## Environment
-- Backend API: `http://localhost:5000`
-- Socket.io: `http://localhost:5000`
+## Available Scripts
 
-Update `package.json` proxy and API URLs if backend is on different host.
+- `npm start` - Run development server
+- `npm run build` - Create production build
+- `npm test` - Run tests
+- `npm eject` - Eject from Create React App
 
-## Build for Production
-```bash
-npm run build
-```
+## Components
+
+- **Login/Register** - Authentication pages
+- **ChatApp** - Main chat interface
+- **ChatWindow** - Message display and input
+- **RoomList** - Available chat rooms
+- **UserList** - Online users
+- **MessageList** - Message display with file support
+- **MessageInput** - Message input with emoji and file upload
 
 ## Features
-- Real-time chat with WebSockets
-- User authentication
-- Chat rooms
-- Online user list
+
+- Real-time messaging
+- File and image uploads
+- Emoji picker
 - Typing indicators
+- Online user list
+- Room management
 - Responsive design
 
-See main README for complete documentation.
+## Styling
+
+Custom CSS in `/src/styles/`:
+- App.css - Main layout
+- Auth.css - Login/Register pages
+- ChatWindow.css - Chat area
+- MessageList.css - Message display
+- MessageInput.css - Input field and emojis
+- Components.css - Room/User lists
+
+## File Structure
+
+```
+client/
+├── public/
+│   ├── index.html
+│   └── favicon.svg
+├── src/
+│   ├── components/     # React components
+│   ├── pages/          # Page components
+│   ├── styles/         # CSS files
+│   ├── App.js
+│   └── index.js
+└── package.json
+```

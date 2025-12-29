@@ -1,43 +1,59 @@
 # SmartWinnr Server
 
-Real-time Chat Application Backend - Node.js & Express.js
+Backend for SmartWinnr chat application built with Node.js, Express.js, and Socket.io.
 
-## Prerequisites
-- Node.js v16.0.0 or higher
-- npm v7.0.0 or higher  
-- MongoDB v5.0 or higher
-
-## Installation
+## Setup
 
 1. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Create `.env` file with:
+2. Create `.env` file:
    ```
    PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/smartwinnr_chat
-   JWT_SECRET=your_jwt_secret_key_change_this_in_production
+   MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/smartwinnr_chat
+   JWT_SECRET=your_secret_key
    NODE_ENV=development
    ```
 
-3. Ensure MongoDB is running
-
-4. Start server:
+3. Start server:
    ```bash
-   npm run dev    # Development with auto-reload
-   npm start      # Production
+   npm run dev
    ```
 
 Server runs on `http://localhost:5000`
 
-## API Endpoints
+## API Routes
 
-- `POST /api/auth/register` - Register
-- `POST /api/auth/login` - Login
-- `GET /api/rooms` - Get all rooms
-- `POST /api/rooms` - Create room
-- `GET /api/messages/room/:roomId` - Get messages
+- `/api/auth` - User authentication
+- `/api/messages` - Message operations
+- `/api/rooms` - Room management
+- `/api/users` - User information
+- `/api/upload` - File uploads
 
-See main README for complete API documentation.
+## Socket.io Events
+
+- `send_message` - Send message to room
+- `typing` / `stop_typing` - Typing indicators
+- `user_join` - User connects
+- `receive_message` - Receive message from server
+
+## Database
+
+Uses MongoDB with Mongoose ODM. Models:
+- User
+- Room
+- Message
+
+## File Structure
+
+```
+server/
+├── models/          # Database schemas
+├── routes/          # API endpoints
+├── middleware/      # Authentication
+├── uploads/         # Uploaded files
+├── server.js        # Main server file
+└── .env             # Environment variables
+```
