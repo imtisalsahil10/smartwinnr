@@ -44,6 +44,11 @@ router.post('/', async (req, res) => {
 
     await room.save();
     await room.populate('creator', 'username');
+    // Broadcast room creation to all connected clients
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('room_created', room);
+    }
 
     res.status(201).json(room);
   } catch (error) {

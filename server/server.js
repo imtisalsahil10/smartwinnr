@@ -57,6 +57,9 @@ const io = socketio(server, {
   }
 });
 
+// Make io available to routes
+app.set('io', io);
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,

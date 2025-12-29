@@ -25,8 +25,18 @@ const ChatApp = ({ user, socket, onLogout }) => {
       setOnlineUsers(users);
     });
 
+    const handleRoomCreated = (room) => {
+      setRooms(prev => {
+        if (prev.some(r => r._id === room._id)) return prev;
+        return [...prev, room];
+      });
+    };
+
+    socket.on('room_created', handleRoomCreated);
+
     return () => {
       socket.off('users_list');
+      socket.off('room_created', handleRoomCreated);
     };
   }, [socket]);
 
