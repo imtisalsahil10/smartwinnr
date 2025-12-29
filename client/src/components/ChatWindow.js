@@ -17,8 +17,11 @@ const ChatWindow = ({ room, user, socket }) => {
 
   useEffect(() => {
     if (!socket) return;
+   
+  console.log('Socket connected, setting up listeners', socket.id);
 
     const handleReceiveMessage = (data) => {
+        console.log('Received message:', data);
       // Only add if not already in state (avoid duplicates from optimistic updates)
       setMessages(prev => {
         const messageExists = prev.some(msg => 
@@ -114,6 +117,7 @@ const ChatWindow = ({ room, user, socket }) => {
         senderId: user.id,
         senderName: user.username,
         timestamp: new Date(),
+          console.log('Emitted send_message event to room:', room._id);
         messageType: 'text'
       });
     }

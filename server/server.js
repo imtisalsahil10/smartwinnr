@@ -135,8 +135,10 @@ io.on('connection', (socket) => {
   socket.on('send_message', (data) => {
     const { roomId, message, senderId, senderName, timestamp, messageType, fileUrl, fileName, fileSize } = data;
     
-    // Broadcast to room
-    io.to(roomId).emit('receive_message', {
+    console.log(`Message sent to room ${roomId} by ${senderName}: ${message}`);
+    
+    // Create normalized message object
+    const messageObj = {
       message,
       senderId,
       senderName,
@@ -145,7 +147,11 @@ io.on('connection', (socket) => {
       fileUrl,
       fileName,
       fileSize
-    });
+    };
+    
+    // Broadcast to ALL users in the room (including sender)
+    io.to(roomId).emit('receive_message', messageObj);
+    console.log(`Broadcasted message to room ${roomId}`);
   });
 
   // Typing indicator
