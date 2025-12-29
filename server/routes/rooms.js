@@ -10,7 +10,10 @@ router.get('/', async (req, res) => {
       .populate('members', 'username');
     res.json(rooms);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    if (error && error.code === 11000) {
+      return res.status(409).json({ message: 'Room name already exists' });
+    }
+    res.status(500).json({ message: error.message || 'Failed to create room' });
   }
 });
 
