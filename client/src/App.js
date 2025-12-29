@@ -28,7 +28,20 @@ function App() {
 
   useEffect(() => {
     if (user && !socket) {
-      const newSocket = io(SOCKET_URL);
+      const newSocket = io(SOCKET_URL, {
+        transports: ['websocket', 'polling'],
+        withCredentials: true,
+        path: '/socket.io'
+      });
+      newSocket.on('connect', () => {
+        console.log('Socket connected:', newSocket.id);
+      });
+      newSocket.on('connect_error', (err) => {
+        console.error('Socket connect_error:', err);
+      });
+      newSocket.on('error', (err) => {
+        console.error('Socket error:', err);
+      });
       newSocket.emit('user_join', {
         userId: user.id,
         userName: user.username

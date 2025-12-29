@@ -36,6 +36,11 @@ const ChatApp = ({ user, socket, onLogout }) => {
       setRooms(response.data);
       if (response.data.length > 0) {
         setSelectedRoom(response.data[0]);
+        // Ensure we join the initial room so sockets start receiving events
+        if (socket) {
+          socket.emit('join_room', response.data[0]._id);
+          console.log('Joined initial room:', response.data[0]._id);
+        }
       }
     } catch (error) {
       console.error('Error fetching rooms:', error);
@@ -50,6 +55,10 @@ const ChatApp = ({ user, socket, onLogout }) => {
       setNewRoomData({ name: '', description: '' });
       setShowNewRoom(false);
       setSelectedRoom(response.data);
+      if (socket) {
+        socket.emit('join_room', response.data._id);
+        console.log('Joined newly created room:', response.data._id);
+      }
     } catch (error) {
       console.error('Error creating room:', error);
     }
