@@ -1,0 +1,100 @@
+/* Message Input Styling */
+.message-input {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+  background: white;
+}
+
+.message-input form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f9f9f9;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.btn-action {
+  background: none;
+  border: none;
+  color: #667eea;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-action:hover {
+  color: #764ba2;
+  transform: scale(1.1);
+}
+
+.input-field {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit;
+}
+
+.btn-send {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-send:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-send:active {
+  transform: scale(0.98);
+}
+
+.emoji-container {
+  position: relative;
+}
+
+.emoji-picker {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.emoji-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.emoji-btn:hover {
+  background: #f0f0f0;
+  transform: scale(1.2);
+}
