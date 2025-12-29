@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../App';
 import RoomList from '../components/RoomList';
 import ChatWindow from '../components/ChatWindow';
 import UserList from '../components/UserList';
@@ -31,7 +32,7 @@ const ChatApp = ({ user, socket, onLogout }) => {
 
   const fetchRooms = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/rooms');
+      const response = await axios.get(`${API_URL}/rooms`);
       setRooms(response.data);
       if (response.data.length > 0) {
         setSelectedRoom(response.data[0]);
@@ -44,7 +45,7 @@ const ChatApp = ({ user, socket, onLogout }) => {
   const handleCreateRoom = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/rooms', newRoomData);
+      const response = await axios.post(`${API_URL}/rooms`, newRoomData);
       setRooms([...rooms, response.data]);
       setNewRoomData({ name: '', description: '' });
       setShowNewRoom(false);
@@ -56,7 +57,7 @@ const ChatApp = ({ user, socket, onLogout }) => {
 
   const handleJoinRoom = async (roomId) => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/rooms/${roomId}/join`);
+      const response = await axios.post(`${API_URL}/rooms/${roomId}/join`);
       setSelectedRoom(response.data);
       socket.emit('join_room', roomId);
     } catch (error) {

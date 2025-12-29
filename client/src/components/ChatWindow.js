@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { API_URL } from '../App';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import '../styles/ChatWindow.css';

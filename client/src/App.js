@@ -7,7 +7,8 @@ import Register from './pages/Register';
 import ChatApp from './pages/ChatApp';
 import './styles/App.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,7 +28,7 @@ function App() {
 
   useEffect(() => {
     if (user && !socket) {
-      const newSocket = io('http://localhost:5000');
+      const newSocket = io(SOCKET_URL);
       newSocket.emit('user_join', {
         userId: user.id,
         userName: user.username
@@ -71,3 +72,4 @@ function App() {
 }
 
 export default App;
+export { API_URL, SOCKET_URL };

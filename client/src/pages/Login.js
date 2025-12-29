@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { API_URL } from '../App';
 import '../styles/Auth.css';
 
 const Login = ({ onLogin }) => {
@@ -23,7 +24,7 @@ const Login = ({ onLogin }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await axios.post(`${API_URL}/auth/login`, formData);
       onLogin(response.data.user, response.data.token);
       navigate('/');
     } catch (err) {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { FaEnvelope, FaLock, FaUser } from 'react-icons/fa';
+import { API_URL } from '../App';
 import '../styles/Auth.css';
 
 const Register = ({ onRegister }) => {
@@ -31,7 +32,7 @@ const Register = ({ onRegister }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post(`${API_URL}/auth/register`, {
         username: formData.username,
         email: formData.email,
         password: formData.password
