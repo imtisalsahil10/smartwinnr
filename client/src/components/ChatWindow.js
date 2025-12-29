@@ -76,7 +76,7 @@ const ChatWindow = ({ room, user, socket }) => {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/messages/room/${room._id}`);
+      const response = await axios.get(`${API_URL}/messages/room/${room._id}`);
       setMessages(response.data);
     } catch (error) {
       console.error('Error fetching messages:', error);
@@ -97,7 +97,7 @@ const ChatWindow = ({ room, user, socket }) => {
       setMessages(prev => [...prev, messageData]);
 
       // Save to database
-      axios.post('http://localhost:5000/api/messages', {
+      axios.post(`${API_URL}/messages`, {
         content: messageContent,
         roomId: room._id,
         messageType: 'text'

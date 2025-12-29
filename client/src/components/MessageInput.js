@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import { API_URL } from '../App';
 import { FaPaperclip, FaSmile, FaPaperPlane } from 'react-icons/fa';
 import '../styles/MessageInput.css';
 
@@ -60,7 +61,7 @@ const MessageInput = ({ onSendMessage, onTyping, onStopTyping, room, user, socke
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:5000/api/upload', formData, {
+      const response = await axios.post(`${API_URL}/upload`, formData, {
         headers: {
           'Authorization': `Bearer ${token}`
           // Let axios set Content-Type automatically for FormData
@@ -94,7 +95,7 @@ const MessageInput = ({ onSendMessage, onTyping, onStopTyping, room, user, socke
         });
 
         // Save to database
-        await axios.post('http://localhost:5000/api/messages', {
+        await axios.post(`${API_URL}/messages`, {
           content: messageText,
           roomId: room._id,
           messageType: isImage ? 'image' : 'file',
