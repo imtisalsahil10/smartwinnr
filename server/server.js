@@ -39,8 +39,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:3001"],
-    methods: ["GET", "POST"]
+    origin: [
+      "http://localhost:3000", 
+      "http://localhost:3001",
+      "https://smartwinnr-two.vercel.app",
+      process.env.FRONTEND_URL || "https://smartwinnr-two.vercel.app"
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
@@ -53,7 +59,15 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch(err => console.log('MongoDB connection error:', err));
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000", 
+    "http://localhost:3001",
+    "https://smartwinnr-two.vercel.app",
+    process.env.FRONTEND_URL || "https://smartwinnr-two.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.static('uploads'));
 app.use('/uploads', express.static('uploads'));
